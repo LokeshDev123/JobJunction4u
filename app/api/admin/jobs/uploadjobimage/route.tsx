@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     }
   
 
-    const uploadPath = path.join(process.cwd(), "statics", "blogs")
+    const uploadPath = path.join(process.cwd(), "public", "jobs")
 
 
      const bytes = Buffer.from(await file.arrayBuffer());
@@ -42,7 +42,7 @@ if(!fs.existsSync(uploadPath)){
 
 
 
-return NextResponse.json({message: 'Image uploaded successfully',image:`${process.env.BASE_URL}/api/statics/blogs/${filename}`, success: true})
+return NextResponse.json({message: 'Image uploaded successfully',image:`${process.env.BASE_URL}/api/statics/jobs/${filename}`, success: true})
 
 } catch (error) {
     console.log(error);
