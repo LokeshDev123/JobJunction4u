@@ -12,4 +12,9 @@ const deleteRoleSchema=zod.object({
 })
 
 
-export {roleCreateSchema,deleteRoleSchema}
+const roleFetchSchema=zod.object({
+    category_name:zod.string(),
+
+})
+
+export {roleCreateSchema,deleteRoleSchema,roleFetchSchema}

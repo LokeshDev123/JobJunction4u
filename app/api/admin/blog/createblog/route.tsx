@@ -16,7 +16,11 @@ export async function POST(req:NextRequest){
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const parseData:any=blogSchema.safeParse(body);
-
+        
+        if(!parseData.success){
+            
+            return NextResponse.json({message:`Error: ${parseData.error.issues[0].path[0]} ${parseData.error.issues[0].message}`,success:false},{status:400})
+        }
  
 
         const decoded=  req.headers.get('token')
@@ -28,10 +32,6 @@ export async function POST(req:NextRequest){
             return NextResponse.json({message:"Invalid Request",success:false},{status:404})
         }
 
-        if(!parseData.success){
-            
-            return NextResponse.json({message:`Error: ${parseData.error.issues[0].path[0]} ${parseData.error.issues[0].message}`,success:false},{status:400})
-        }
         const {title,author,image,content}=parseData.data;
 
         const newBlog=new Blog({title,author,image,content,user_id:exist_user._id});

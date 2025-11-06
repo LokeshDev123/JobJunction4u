@@ -38,6 +38,9 @@ export async function proxy(req:NextRequest){
 export const config={
     matcher:[
         "/api/admin/:path*",
-        "/api/user/deleteuser"
+        "/api/user/deleteuser",
+        "/api/subscription/create-plan",
+        "/api/subscription/create-subscription",
+        
     ]
 }

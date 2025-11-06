@@ -24,6 +24,10 @@ const userSchema=new mongoose.Schema({
         required:true,
         enum:["admin","user","recruiter"]
     },
+    customer_id:{
+        type:String,
+    
+    },
     password:{
         type:String,
         required:true,
@@ -37,5 +41,5 @@ const userSchema=new mongoose.Schema({
 
 })
 
-const User:Model<{name:string,email:string,mobile_no:string,user_type:string,password:string,created_at:Date}>=mongoose.models["jj4u_userdetails"] || mongoose.model("jj4u_userdetails",userSchema);
+const User:Model<{name:string,email:string,mobile_no:string,user_type:string,customer_id:string,password:string,created_at:Date}>=mongoose.models["jj4u_userdetails"] || mongoose.model("jj4u_userdetails",userSchema);
 export default User;
