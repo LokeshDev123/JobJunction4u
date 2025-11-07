@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
       responsibilities: body.responsibilities,
       skills: body.skills,
       salary: body.salary,
+      job_link: body.job_link,
       experience: body.experience,
       job_expiry_date: body.job_expiry_date,
     });

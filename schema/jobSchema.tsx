@@ -13,6 +13,7 @@ const jobCreateSchema=zod.object({
     salary:zod.string().min(1).max(100),
     location:zod.string().min(3).max(100),
     experience:zod.string().min(3).max(100),
+    job_link:zod.url(),
     job_expiry_date:zod.string().refine((date)=>{
         return !isNaN(Date.parse(date));
     },"Invalid date format"),

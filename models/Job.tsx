@@ -2,6 +2,7 @@ import mongoose, { Model } from "mongoose";
 
 
 
+
 const jobSchema=new mongoose.Schema({
     user_id:{
         type:mongoose.Schema.Types.ObjectId,
@@ -56,6 +57,10 @@ const jobSchema=new mongoose.Schema({
     experience:{
         type:String,
         required:true,
+    },
+    job_link:{
+        type:String,
+        required:true
     },
     created_at:{
         type:Date,

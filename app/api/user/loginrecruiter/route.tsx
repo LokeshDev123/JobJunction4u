@@ -23,8 +23,7 @@ export async function POST(req:NextRequest){
         const {mobile_no,password}=parsedData.data;
 
 
-
-        const existingUserByMobile=await User.findOne({mobile_no,user_type:"user"});
+        const existingUserByMobile=await User.findOne({mobile_no,user_type:"recruiter"});
 
         if(!existingUserByMobile){
             return NextResponse.json({message:"User does not exist",success:false},{status:400})
