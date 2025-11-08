@@ -40,15 +40,15 @@ const instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY, key_secret: pr
             return NextResponse.json({message:"Mobile number already exists",success:false},{status:400})
         }
 
-        const customer=await instance.customers.create({
-  name: name,
-  contact: mobile_no,
-  email: email,
+//         const customer=await instance.customers.create({
+//   name: name,
+//   contact: mobile_no,
+//   email: email,
 
-})
+// })
 
 
-console.log(customer.id);
+// console.log(customer.id);
 
         
         const newUser=new User({
@@ -56,7 +56,7 @@ console.log(customer.id);
             email,
             mobile_no,
             user_type,
-            customer_id:customer.id,
+            // customer_id:customer.id,
             password
         })
         await newUser.save();

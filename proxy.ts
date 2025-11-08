@@ -39,6 +39,7 @@ export const config={
     matcher:[
         "/api/admin/:path*",
         "/api/user/deleteuser",
+        "/api/user/fetchuser-details",
         "/api/subscription/create-plan",
         "/api/subscription/create-subscription",
         
