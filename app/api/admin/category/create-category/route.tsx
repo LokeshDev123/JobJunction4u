@@ -19,8 +19,15 @@ export async function POST(req:NextRequest){
 
     const existuser = await User.findOne({
       _id: JSON.parse(decoded!)._id,
-      $or: [{ user_type: "admin" }, { user_type: "recruiter" }],
+      user_type: "admin",
     });
+    if (!existuser) {
+      return NextResponse.json(
+        { message: "Unauthorized Access", success: false },
+        { status: 401 }
+      );
+    }
+
         const  body=await req.json()
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

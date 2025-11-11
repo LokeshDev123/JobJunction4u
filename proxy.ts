@@ -30,6 +30,9 @@ export async function proxy(req:NextRequest){
 
         
     } catch (error) {
+        console.log(error);
+
+       
         
         return NextResponse.json({message:"Internal Server Error",success:false},{status:500})
     }
@@ -37,11 +40,14 @@ export async function proxy(req:NextRequest){
 
 export const config={
     matcher:[
-        "/api/admin/:path*",
+        "/api/admin/role/create-role",
+        "/api/admin/category/create-category",
+        "/api/admin/category/delete-category",
         "/api/user/deleteuser",
         "/api/user/fetchuser-details",
         "/api/subscription/create-plan",
         "/api/subscription/create-subscription",
+        "/api/admin/jobs/createjob",
         
     ]
 }

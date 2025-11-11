@@ -10,6 +10,8 @@ export async function POST(req:NextRequest){
         
          const  body=await req.json()
 
+         console.log(body);
+         
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const parseData:any=roleFetchSchema.safeParse(body)
 
@@ -18,11 +20,12 @@ export async function POST(req:NextRequest){
         }
         await dbToConnect();
 
-        const data=await Role.find({});
+        const data=await Role.find({category_id:parseData.data.category_id});
 
         return NextResponse.json({data:data,success:true},{status:200})
 
     } catch (error) {
+        console.log(error);
         
         return NextResponse.json({message: 'Internal Server Error', success: false}, {status: 500})
     }

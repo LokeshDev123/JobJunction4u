@@ -1,8 +1,8 @@
 import mongoose, { Model } from "mongoose";
 
 const roleSchema=new mongoose.Schema({
-    category_name:{
-        type:String,
+    category_id:{
+        type:mongoose.Schema.Types.ObjectId,
         ref:"jj4u_category",
         required:true
     },

@@ -1,4 +1,5 @@
 import dbToConnect from "@/db/db";
+import Category from "@/models/Category";
 import Job from "@/models/Job";
 import User from "@/models/User";
 import { jobCreateSchema } from "@/schema/jobSchema";
@@ -47,13 +48,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const existCategory=await Category.findOne({_id:body.category})
+
+    if(!existCategory){
+        return NextResponse.json({message:"Category Not Found",success:false},{status:404})
+    }
+
+    
+
     const newJob = new Job({
       user_id: existuser._id,
       title: body.title,
       description: body.description,
       image_url: body.image_url,
       location: body.location,
-      category: body.category,
+      category: existCategory.name,
       role: body.role,
       job_type: body.job_type,
       responsibilities: body.responsibilities,

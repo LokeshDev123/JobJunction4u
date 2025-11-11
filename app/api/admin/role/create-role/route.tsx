@@ -1,4 +1,5 @@
 import dbToConnect from "@/db/db";
+import Category from "@/models/Category";
 import Role from "@/models/Role";
 import User from "@/models/User";
 import { roleCreateSchema } from "@/schema/roleSchema";
@@ -32,9 +33,20 @@ export async function POST(req:NextRequest){
 
         await dbToConnect();
 
-        const {name,category_name}=parseData.data;
+        const category=await Category.findOne({_id:parseData.data.category_id});
+        if(!category){
+            return NextResponse.json({message:"Category Not Found",success:false},{status:404})
+        }
 
-        const newRole=new Role({name,category_name});
+        const role=await Role.findOne({name:parseData.data.name});
+        if(role){
+            return NextResponse.json({message:"Role Already Exists",success:false},{status:400})
+        }
+
+
+        const {name,category_id}=parseData.data;
+
+        const newRole=new Role({name,category_id});
 
         await newRole.save();
 
