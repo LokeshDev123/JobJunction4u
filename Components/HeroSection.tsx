@@ -134,12 +134,20 @@ export default function HeroSection() {
                Find Your Dream Job Today!
               </h1>}
 
+
+                 {pathname==="/findjobs" && <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
+               Find Your Dream Job
+              </h1>}
+
+
               {pathname==="/jobdescription" && <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
                Job Description
               </h1>}
               { pathname==="/" && <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
                Connecting Talent with Opportunity: Your Gateway to Career Success
               </p>}
+              
+
               { pathname==="/" && <div className="mt-10 flex w-full items-center justify-center gap-x-6">
                 
 <div className="w-full max-w-3xl bg-white flex flex-wrap md:flex-nowrap justify-between md:justify-center text-base md:text-xl items-center h-auto md:h-20 rounded-xl  p-2 gap-4 md:gap-6">

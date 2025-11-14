@@ -56,9 +56,7 @@ export async function PUT(req: NextRequest) {
 
     existjob.title=body.title;
     existjob.description=body.description;
-    existjob.image_url=body.image_url;
     existjob.category=body.category;
-
     existjob.role=body.role;
     existjob.job_type=body.job_type;
     existjob.responsibilities=body.responsibilities;
