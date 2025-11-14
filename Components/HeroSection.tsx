@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { usePathname, useRouter } from 'next/navigation'
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -14,6 +15,8 @@ const navigation = [
 export default function HeroSection() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const router=useRouter()
+  const pathname=usePathname()
   return (
     <div className="bg-gray-900">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -127,13 +130,17 @@ export default function HeroSection() {
             
             </div>
             <div className="text-center">
-              <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
+              {pathname==="/" && <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
                Find Your Dream Job Today!
-              </h1>
-              <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
+              </h1>}
+
+              {pathname==="/jobdescription" && <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
+               Job Description
+              </h1>}
+              { pathname==="/" && <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
                Connecting Talent with Opportunity: Your Gateway to Career Success
-              </p>
-              <div className="mt-10 flex w-full items-center justify-center gap-x-6">
+              </p>}
+              { pathname==="/" && <div className="mt-10 flex w-full items-center justify-center gap-x-6">
                 
 <div className="w-full max-w-3xl bg-white flex flex-wrap md:flex-nowrap justify-between md:justify-center text-base md:text-xl items-center h-auto md:h-20 rounded-xl  p-2 gap-4 md:gap-6">
 
@@ -194,7 +201,7 @@ export default function HeroSection() {
 
 
 
-              </div>
+              </div>}
             </div>
           </div>
         </div>
