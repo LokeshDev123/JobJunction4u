@@ -2,6 +2,7 @@ import User from "@/models/User";
 import { forgetPasswordSchena } from "@/schema/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
+import CryptoJS from "crypto-js";
 
 export async function PUT(req:NextRequest) {
     try {
@@ -15,7 +16,11 @@ export async function PUT(req:NextRequest) {
             return NextResponse.json({success:false,message:parseData.error.issues[0].path[0] + " " + parseData.error.issues[0].message},{status:400})
         }
 
-        const {mobile_no,newpassword}=parseData.data;
+
+        const {mobile_no,newpassword,cpassword}=parseData.data;
+        if(newpassword!==cpassword){
+            return NextResponse.json({message:"Password and confirm password does not match",success:false},{status:400})
+        }
 
         const existingUserByMobile=await User.findOne({mobile_no});
 
@@ -23,7 +28,10 @@ export async function PUT(req:NextRequest) {
             return NextResponse.json({message:"User does not exist",success:false},{status:400})
         }
 
-        existingUserByMobile.password=newpassword;
+        const ciphertext = CryptoJS.AES.encrypt(newpassword, process.env.AUTH_PASS!).toString();
+        
+        
+        existingUserByMobile.password=ciphertext;
         await existingUserByMobile.save();
 
         return NextResponse.json({message:"Password changed successfully",success:true},{status:200})

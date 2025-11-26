@@ -3,7 +3,7 @@ import User from "@/models/User";
 import { loginUserSchema } from "@/schema/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodSafeParseResult } from "zod";
-
+import CryptoJS from "crypto-js";
 import jwt from 'jsonwebtoken'
 export async function POST(req:NextRequest){
 
@@ -27,6 +27,15 @@ export async function POST(req:NextRequest){
 
         if(!existingUserByMobile){
             return NextResponse.json({message:"User does not exist",success:false},{status:400})
+        }
+        
+
+        
+                const bytes  = CryptoJS.AES.decrypt(existingUserByMobile.password, process.env.AUTH_PASS!);
+        const originalText = bytes.toString(CryptoJS.enc.Utf8);
+        
+        if(originalText!==password){
+            return NextResponse.json({message:"Invalid Credentials",success:false},{status:400})
         }
         
 

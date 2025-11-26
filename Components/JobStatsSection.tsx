@@ -53,7 +53,7 @@ export default function JobStatsSection() {
   }, [visible]);
 
   return (
-    <div ref={sectionRef} className="bg-white py-16 sm:py-24">
+    <div ref={sectionRef} className="bg-white py-16 sm:py-24" id="ourgrowth">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
         {/* Left: Image Card */}
         <div className="flex justify-center">

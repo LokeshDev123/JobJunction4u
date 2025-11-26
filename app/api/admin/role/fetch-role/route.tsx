@@ -1,4 +1,5 @@
 import dbToConnect from "@/db/db";
+import Category from "@/models/Category";
 import Role from "@/models/Role";
 import { roleFetchSchema } from "@/schema/roleSchema";
 
@@ -10,7 +11,7 @@ export async function POST(req:NextRequest){
         
          const  body=await req.json()
 
-         console.log(body);
+       
          
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const parseData:any=roleFetchSchema.safeParse(body)
@@ -20,9 +21,14 @@ export async function POST(req:NextRequest){
         }
         await dbToConnect();
 
+        const myCategory=await Category.findOne({_id:parseData.data.category_id});
+        if(!myCategory){
+            return NextResponse.json({message:"Category Not Found",success:false},{status:404})
+        }
+
         const data=await Role.find({category_id:parseData.data.category_id});
 
-        return NextResponse.json({data:data,success:true},{status:200})
+        return NextResponse.json({data:data,category:myCategory.name,success:true},{status:200})
 
     } catch (error) {
         console.log(error);

@@ -20,6 +20,7 @@ const loginUserSchema=zod.object({
 const forgetPasswordSchena=zod.object({
     mobile_no:zod.string().min(10).max(10),
     newpassword:zod.string().min(6).max(20),
+     cpassword:zod.string().min(6).max(20),
 })
 
 const deleteUserSchema=zod.object({
@@ -28,7 +29,6 @@ const deleteUserSchema=zod.object({
 
 const userSearchSchema=zod.object({
     search:zod.string(),
-    skip:zod.int(),
 })
 
 export {createUserSchema,loginUserSchema,deleteUserSchema,forgetPasswordSchena,userSearchSchema};

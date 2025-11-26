@@ -13,7 +13,7 @@ const blogSchema=z.object({
 
 
 const deleteSchema=z.object({
-    id:z.string()
+    _id:z.string()
 })
 
 export {blogSchema,deleteSchema}

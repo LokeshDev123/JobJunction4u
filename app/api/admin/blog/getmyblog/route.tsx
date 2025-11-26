@@ -13,6 +13,8 @@ export async function POST(req:NextRequest){
         await connectDB();
 
         const body=await req.json();
+
+        
         const blogs=await Blog.findOne({_id:body.id}).sort({date:-1});
 
         if(!blogs){

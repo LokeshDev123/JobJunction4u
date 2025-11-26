@@ -13,7 +13,9 @@ export async function POST(req:NextRequest){
 
         const blogs=await Blog.find().sort({date:-1});
 
-        return NextResponse.json({message:"Success",success:true,blogs},{status:200});
+        
+
+        return NextResponse.json({message:"Success",success:true,data:blogs},{status:200});
 
         
     } catch (error) {

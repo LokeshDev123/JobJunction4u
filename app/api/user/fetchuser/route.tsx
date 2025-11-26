@@ -3,7 +3,7 @@ import { userSearchSchema } from "@/schema/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(req:NextRequest){
+export async function POST(req:NextRequest){
 
     try {
             
@@ -22,20 +22,25 @@ export async function GET(req:NextRequest){
             return NextResponse.json({message:"Unauthorized Access",success:false},{status:401})
         }
 
+        interface IUserSearch{
+            search?:string,
+        }
+        if(!parseData.data.search || parseData.data.search.trim()===""){
+            const users=await User.find().sort({ createdAt: -1 });
+            return NextResponse.json({message:"User fetched successfully",success:true,data:users},{status:200})
+        }
 
         
         const users=await User.find({
   $text: { $search: "\"" + parseData.data.search + "\""  }
-}, {
-  score: { $meta: "textScore" },
-  name: 1,
-  email: 1,
-  mobile_no: 1
-}).sort({ score: { $meta: "textScore" } }).skip(parseData.data.skip).limit(150);
+} ).sort({ createdAt: -1 });
 
 
         return NextResponse.json({message:"User fetched successfully",success:true,data:users},{status:200})
     } catch (error) {
+
+        console.log(error);
+        
         
         return NextResponse.json({message:"Internal Server Error",success:false},{status:500})
     }

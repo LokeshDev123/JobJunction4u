@@ -10,7 +10,7 @@ import { blogSchema ,deleteSchema} from "@/schema/blogSchema";
 export async function DELETE(req:NextRequest){
     try {
         await connectDB();
-        const decode=  req.headers.get('user')
+        const decode=  req.headers.get('token')
 
         const exist_user=await User.findOne({_id:JSON.parse(decode!)._id,user_type:"admin"})
 
@@ -21,15 +21,16 @@ export async function DELETE(req:NextRequest){
 
         const body=await req.json();
 
+        
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const parsedata:any=deleteSchema.safeParse(body);
 
         if(!parsedata.success){
             return NextResponse.json({message:`Error: ${parsedata.error.issues[0].path[0]} ${parsedata.error.issues[0].message}`,success:false},{status:400})
         }
-        const {id}=parsedata.data;
+        const {_id}=parsedata.data;
 
-        const blog=await Blog.findOneAndDelete({_id:id,userId:exist_user._id});
+        const blog=await Blog.findOneAndDelete({_id:_id});
 
         if(!blog){
             return NextResponse.json({message:"Blog not found",success:false},{status:404})
@@ -39,6 +40,8 @@ export async function DELETE(req:NextRequest){
         
 
     } catch (error) {
+        console.log(error);
+        
 
         return NextResponse.json({message: 'Internal Server Error', success: false}, {status: 500})
         

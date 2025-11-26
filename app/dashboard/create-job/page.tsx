@@ -1,6 +1,7 @@
 "use client";
 
 import DashboardNavbar from "@/Components/DashboardNavbar";
+import { useRouter } from "next/navigation";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 interface JobFormData {
@@ -32,6 +33,9 @@ export default function Page() {
   const [roles, setRoles] = useState<{ _id: string; name: string }[]>([]);
   const [loadingRoles, setLoadingRoles] = useState(false);
    const [loading, setloading] = useState(false)
+   const router=useRouter()
+   
+   const [formloading, setformloading] = useState(false)
   const [formData, setFormData] = useState<JobFormData>({
     jobTitle: "",
     jobDescription: "",
@@ -48,6 +52,14 @@ export default function Page() {
     jobExpiryDate: "",
   });
 
+
+  useEffect(()=>{
+
+    if(!sessionStorage.getItem("adminToken") && !sessionStorage.getItem("recruiterToken")){
+
+      router.push("/dashboard/signin")
+    }
+  },[])
 
 
     const fetchCategories = async () => {
@@ -115,21 +127,22 @@ export default function Page() {
 
     try {
       
-      console.log(formData);
    const token=sessionStorage.getItem("adminToken") || sessionStorage.getItem("recruiterToken")
 
        const formdata=new FormData()
     formdata.append("file",formData.image!)
     formdata.append("token",token!)
     
+    setformloading(true)
 
     const uploadfile =await (await fetch(`/api/admin/jobs/uploadjobimage`,{
       method:'POST',
       body:formdata
     })).json()
 
+    
     if(uploadfile.success){
-
+      
       const response=await(await fetch(`/api/admin/jobs/createjob?token=${token}`,{
         method:'POST',
         headers:{
@@ -150,7 +163,7 @@ export default function Page() {
           job_expiry_date:formData.jobExpiryDate
         })
       })).json()
-
+      
       if(response.success){
         setFormData({
           jobTitle: "",
@@ -167,8 +180,10 @@ export default function Page() {
           jobLink: "",
           jobExpiryDate: "",
         })
+        setformloading(false)
         alert("Job is created Successfully")
       }else{
+        setformloading(false)
         alert(response.message)
       }
 
@@ -453,12 +468,13 @@ export default function Page() {
         </div>
 
         {/* Submit Button */}
-        <button
+       {!formloading && <button
           type="submit"
+          disabled={formloading}
           className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-semibold transition"
         >
           Submit Job
-        </button>
+        </button>}
       </form>
     </div>
     </>

@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
     try {
 
 
-      console.log("Jai mata di");
       
 
         await dbToConnect();
@@ -34,7 +33,6 @@ export async function POST(req: NextRequest) {
                     return NextResponse.json({message:"Unauthorized Access",success:false},{status:401})
        }
 
-       console.log(tokenVerify);
        
         
 

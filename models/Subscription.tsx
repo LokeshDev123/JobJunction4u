@@ -6,34 +6,32 @@ const subscriptionSchema=new mongoose.Schema({
         ref:"jj4u_userdetails",
         required:true
     },
-    plan_id:{
+    razorpayOrderId:{
         type:String,
         required:true
 
     },
-    plan_name:{
+    razorpayPaymentId:{
         type:String,
         required:true
-    },
-    subscription_id:{
-        type:String,
-        required:true
-    },
-    razorpay_payment_id:{
-        type:String,
-        required:true
-    },
 
-    subscription_end:{
-        type:Date,
+    },
+    razorpaySignature:{
+        type:String,
         required:true
+
     },
     created_at:{
         type:Date,
         default:Date.now
-    }
+    },
+    end_at: {
+    type: Date,
+    required: true,
+    default: () => new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) // +1 year
+  }
 })
 
 
-const Subscription:Model<{user_id:string,plan_id:string,plan_name:string,subscription_id:string,subscription_end:Date,created_at:Date}>=mongoose.models["jj4u_subscription"]|| mongoose.model("jj4u_subscription",subscriptionSchema)
+const Subscription:Model<{user_id:string,razorpayOrderId:string,razorpayPaymentId:string,razorpaySignature:string,created_at:Date,end_at:Date}>=mongoose.models["jj4u_subscription"]|| mongoose.model("jj4u_subscription",subscriptionSchema)
 export default Subscription

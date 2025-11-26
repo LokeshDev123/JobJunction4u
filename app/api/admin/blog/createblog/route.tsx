@@ -22,19 +22,35 @@ export async function POST(req:NextRequest){
             return NextResponse.json({message:`Error: ${parseData.error.issues[0].path[0]} ${parseData.error.issues[0].message}`,success:false},{status:400})
         }
  
+ const decoded = req.headers.get("token");
 
-        const decoded=  req.headers.get('token')
-        
-        
-        const exist_user=await User.findOne({_id:JSON.parse(decoded!)._id,user_type:"admin"})
 
-        if(!exist_user){
-            return NextResponse.json({message:"Invalid Request",success:false},{status:404})
-        }
+ 
+    if (!decoded) {
+
+        
+      return NextResponse.json(
+        { message: "Unauthorized Access", success: false },
+        { status: 401 }
+      );
+    }
+
+    const existuser = await User.findOne({
+      _id: JSON.parse(decoded!)._id,
+      $or: [{ user_type: "admin" }],
+    });
+
+    if (!existuser) {
+          
+      return NextResponse.json(
+        { message: "Unauthorized Access", success: false },
+        { status: 401 }
+      );
+    }
 
         const {title,author,image,content}=parseData.data;
 
-        const newBlog=new Blog({title,author,image,content,user_id:exist_user._id});
+        const newBlog=new Blog({title,author,image,content,user_id:existuser._id});
 
         await newBlog.save();
 

@@ -71,14 +71,14 @@ const RoleManager = () => {
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res:any = await fetch(
+      const res:any = await(await fetch(
         `/api/admin/role/create-role?token=${sessionStorage.getItem("adminToken")}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: role.trim(), category_id: myCategory._id }),
         }
-      );
+      )).json();
 
       if (!res.success) {
 

@@ -6,3 +6,7 @@
   --foreground: #171717;
 }
 
+@variant dark (&:where(.dark, .dark *));
+:root{
+  background-color: #eceef3;
+}

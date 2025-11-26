@@ -47,6 +47,13 @@ export async function PUT(req: NextRequest) {
       );
     }
 
+    if(existuser.user_type==="recruiter"){
+      const existjob=await Job.findOne({_id:body._id,user_id:existuser._id})
+      if(!existjob){
+        return NextResponse.json({message:"Job does not exist",success:false},{status:400})
+      }
+    }
+
 
     const existjob=await Job.findOne({_id:body._id})
     if(!existjob){

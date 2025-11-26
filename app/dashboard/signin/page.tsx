@@ -43,6 +43,9 @@ export default function Page() {
                 })
 
                 sessionStorage.setItem("adminToken", res.token)
+                 setTimeout(()=>{
+                router.push("/dashboard")
+            },3000)
             }
             else{
                 toast.success("Login Successful",{
@@ -50,11 +53,12 @@ export default function Page() {
                 })
 
                 sessionStorage.setItem("recruiterToken", res.token)
+                 setTimeout(()=>{
+                router.push("/dashboard/create-job")
+            },3000)
             }
 
-            setTimeout(()=>{
-                router.push("/dashboard")
-            },3000)
+           
 
 
         }

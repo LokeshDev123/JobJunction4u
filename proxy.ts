@@ -41,13 +41,23 @@ export async function proxy(req:NextRequest){
 export const config={
     matcher:[
         "/api/admin/role/create-role",
+        "/api/payment/verify-payment",
+        "/api/payment/exist-subscription",
+        "/api/payment/create-order",
+        "/api/admin/jobs/fetch-recruiter-jobs",
+        "/api/admin/jobs/updatejob",
         "/api/admin/category/create-category",
         "/api/admin/category/delete-category",
         "/api/user/deleteuser",
         "/api/user/fetchuser-details",
+        "/api/user/fetchuser",
         "/api/subscription/create-plan",
         "/api/subscription/create-subscription",
         "/api/admin/jobs/createjob",
+        "/api/admin/blog/createblog",
+        "/api/admin/blog/deleteblog",
+        "/api/admin/jobs/deletejob",
+        "/api/user/createrecruiter",
         
     ]
 }

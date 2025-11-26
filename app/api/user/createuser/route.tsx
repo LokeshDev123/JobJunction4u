@@ -4,7 +4,7 @@ import { createUserSchema } from "@/schema/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
-
+import CryptoJS from "crypto-js";
 export async function POST(req:NextRequest){
 
     try {
@@ -19,7 +19,7 @@ export async function POST(req:NextRequest){
         if(!parsedData.success){
             return NextResponse.json({success:false,message:parsedData.error.issues[0].path[0] + " " + parsedData.error.issues[0].message},{status:400})
         }
-const instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY, key_secret: process.env.RAZORPAY_SECRET });
+
         const {name,email,mobile_no,user_type,password,cpassword,authpasscode}=parsedData.data;
 
         if(authpasscode!==process.env.AUTH_PASS){
@@ -50,6 +50,9 @@ const instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY, key_secret: pr
 
 // console.log(customer.id);
 
+const ciphertext = CryptoJS.AES.encrypt(password, process.env.AUTH_PASS!).toString();
+
+
         
         const newUser=new User({
             name,
@@ -57,7 +60,7 @@ const instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY, key_secret: pr
             mobile_no,
             user_type,
             // customer_id:customer.id,
-            password
+            password:ciphertext
         })
         await newUser.save();
 

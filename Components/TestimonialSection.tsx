@@ -12,40 +12,57 @@ export default function TestimonialSection() {
   const testimonials = [
     {
       id: 1,
-      name: "Aarav Sharma",
+      name: "Nirmal Parekh",
       role: "Software Engineer at TechCorp",
-      image: "https://randomuser.me/api/portraits/men/75.jpg",
+      image: "/testimonials/1.jpg",
       text: "JobJunction made my job search effortless! I landed a full-stack developer position in less than 3 weeks. The platform is smooth and reliable.",
       rating: 5,
     },
     {
       id: 2,
-      name: "Priya Mehta",
+      name: "Sunidhi Soni",
       role: "HR Manager at Innovent Solutions",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      image: "/testimonials/2.jpg",
       text: "As a recruiter, I’ve used many platforms — but this one stands out! The candidate quality and dashboard analytics are outstanding.",
       rating: 5,
     },
     {
       id: 3,
-      name: "Rohit Verma",
+      name: "Sandeep Swami",
       role: "Marketing Specialist at Growthly",
-      image: "https://randomuser.me/api/portraits/men/52.jpg",
+      image: "/testimonials/3.jpg",
       text: "The personalized job recommendations saved me a ton of time. It’s the most intuitive job portal I’ve ever used!",
       rating: 4,
     },
     {
       id: 4,
-      name: "Simran Kaur",
+      name: "Dipanshu kumar",
       role: "Frontend Developer at Pixel Labs",
-      image: "https://randomuser.me/api/portraits/women/55.jpg",
+      image: "/testimonials/4.jpg",
+      text: "Loved the user experience and how easy it was to connect with employers. Highly recommend JobJunction to every job seeker!",
+      rating: 5,
+    },
+
+       {
+      id: 5,
+      name: "Bhanu Priya",
+      role: "Marketing Specialist at Growthly",
+      image: "/testimonials/5.jpg",
+      text: "The personalized job recommendations saved me a ton of time. It’s the most intuitive job portal I’ve ever used!",
+      rating: 4,
+    },
+    {
+      id: 6,
+      name: "Bijendra Rawat",
+      role: "Frontend Developer at Pixel Labs",
+      image: "/testimonials/6.jpg",
       text: "Loved the user experience and how easy it was to connect with employers. Highly recommend JobJunction to every job seeker!",
       rating: 5,
     },
   ];
 
   return (
-    <section className="bg-emerald-700 py-20 sm:py-28">
+    <section className="bg-emerald-700 py-20 sm:py-28" id="testimonials">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
           What Our Users Say

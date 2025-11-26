@@ -36,14 +36,17 @@ export default function CategoryManager() {
     setLoading(true);
 
     try {
-      const res = await fetch(
+      const res = await (await fetch(
         `/api/admin/category/create-category?token=${sessionStorage.getItem("adminToken")}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: category.trim() }),
         }
-      );
+      )).json();
+
+
+      
 
    if (!res.success) {
 

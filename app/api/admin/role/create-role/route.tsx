@@ -38,7 +38,7 @@ export async function POST(req:NextRequest){
             return NextResponse.json({message:"Category Not Found",success:false},{status:404})
         }
 
-        const role=await Role.findOne({name:parseData.data.name});
+        const role=await Role.findOne({name:parseData.data.name,category_id:parseData.data.category_id});
         if(role){
             return NextResponse.json({message:"Role Already Exists",success:false},{status:400})
         }

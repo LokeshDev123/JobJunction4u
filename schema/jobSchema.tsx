@@ -5,7 +5,7 @@ const jobCreateSchema=zod.object({
     title:zod.string().min(3).max(100),
     description:zod.string().min(10).max(5000),
     image_url:zod.url(),
-    category:zod.string().min(3).max(50),
+    category:zod.string().min(2).max(50),
     role:zod.string().min(3).max(50),
     job_type:zod.string().min(3).max(50),
     responsibilities:zod.json(),
@@ -30,6 +30,10 @@ const jobDeleteSchema=zod.object({
 const jobSearchSchema=zod.object({
     search:zod.string(),
     skip:zod.int(),
+    category:zod.string().optional(),
+    job_type:zod.string().optional(),
+    role:zod.string().optional(),
+    experience:zod.string().optional(),
 })
 
 

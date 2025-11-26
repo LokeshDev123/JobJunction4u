@@ -34,12 +34,21 @@ export async function POST(req:NextRequest){
         const parseData:any=categoryCreateSchema.safeParse(body)
 
         if(!parseData.success){
+          
+          
             return NextResponse.json({message:`Error: ${parseData.error.issues[0].path[0]} ${parseData.error.issues[0].message}`,success:false},{status:400})
         }
 
         await dbToConnect();
 
         const {name}=parseData.data;
+
+
+        const existingCategory=await Category.findOne({name:name});
+
+        if(existingCategory){
+            return NextResponse.json({message:"Category already exists",success:false},{status:400})
+        }
 
         const newCategory=new Category({name});
 
