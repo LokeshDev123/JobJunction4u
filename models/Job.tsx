@@ -75,6 +75,6 @@ const jobSchema=new mongoose.Schema({
 })
 
 
-const Job:Model<{title:string,description:string,image_url:string,category:string,role:string,job_type:string,responsibilities:string,skills:string,salary:string,location:string,experience:string,created_at:Date,job_expiry_date:Date}>=mongoose.models["jj4u_jobs"] || mongoose.model("jj4u_jobs",jobSchema);
+const Job:Model<{title:string,description:string,image_url:string,category:string,job_link:string,role:string,job_type:string,responsibilities:string,skills:string,salary:string,location:string,experience:string,created_at:Date,job_expiry_date:Date}>=mongoose.models["jj4u_jobs"] || mongoose.model("jj4u_jobs",jobSchema);
 
 export default Job;

@@ -246,7 +246,7 @@ export default function Page() {
           {result.map((jobData: any, i) => (
             <div
               key={i}
-              className="w-full min-h-64 flex gap-4 flex-col p-4 shadow mb-4"
+              className="w-full min-h-64 bg-white flex gap-4 flex-col p-4 shadow mb-4"
             >
               <span className="max-w-fit rounded-full bg-green-400/10 px-2 py-1 text-xs font-medium text-green-600">
                 {timeAgo(jobData.created_at)}

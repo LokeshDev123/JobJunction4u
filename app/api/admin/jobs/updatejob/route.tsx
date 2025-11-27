@@ -13,6 +13,8 @@ export async function PUT(req: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const parsedData: any = jobUpdateSchema.safeParse(body);
 
+
+
     if (!parsedData.success) {
       return NextResponse.json(
         {
@@ -61,11 +63,17 @@ export async function PUT(req: NextRequest) {
     }
 
 
+
+    console.log(parsedData.data);
+    
+
     existjob.title=body.title;
     existjob.description=body.description;
     existjob.category=body.category;
     existjob.role=body.role;
     existjob.job_type=body.job_type;
+    existjob.job_link=body.job_link;
+    existjob.job_expiry_date=body.job_expiry_date;
     existjob.responsibilities=body.responsibilities;
     existjob.skills=body.skills;
     existjob.salary=body.salary;
